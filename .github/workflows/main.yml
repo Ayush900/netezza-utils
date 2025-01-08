@@ -64,7 +64,7 @@ jobs:
         uses: Ayush900/go-release-executables@v1.0.0
       - name: Create tarball and upload release
         run: |
-          tar -czf ../nz_s3connector.tgz -C bnr-utils/nz_s3connector .
+          tar -czf ../nz_s3connector.tgz -C bnr-utils/nz_s3Connector .
           gh release upload ${{ github.event.release.tag_name }} bnr-utils/nz_s3connector.tgz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
