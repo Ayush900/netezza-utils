@@ -78,7 +78,7 @@ jobs:
           pwd
           cd ..
           pwd
-          tar -czf bnr-utils/nz_s3connector.tgz -C bnr-utils/nz_s3connector .
+          tar -czf bnr-utils/nz_s3connector.tgz -C bnr-utils/nz_s3Connector .
           echo "tar file fail ho rahi"
           gh release upload ${{ github.event.release.tag_name }} bnr-utils/nz_s3connector.tgz
         env:
