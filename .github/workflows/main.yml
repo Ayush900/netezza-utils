@@ -73,7 +73,11 @@ jobs:
         run: |
           ls
           pwd
-          tar -czf ../nz_s3connector.tgz -C bnr-utils/nz_s3connector .
-          gh release upload ${{ github.event.release.tag_name }} ../nz_s3connector.tgz
+          cd bnr-utils
+          ls
+          pwd
+          cd ..
+          tar -czf bnr-utils/nz_s3connector.tgz -C bnr-utils/nz_s3connector .
+          gh release upload ${{ github.event.release.tag_name }} bnr-utils/nz_s3connector.tgz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
