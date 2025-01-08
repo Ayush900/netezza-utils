@@ -64,7 +64,7 @@ jobs:
         uses: Ayush900/go-release-executables@v1.0.0
       - name: Create tarball and upload release
         run: |
-          tar -czf ../nz_s3connector.tgz -C bnr-utils/nz_s3Connector .
+          tar -czf bnr-utils/nz_s3connector.tgz -C bnr-utils/nz_s3Connector .
           echo "--"
           ls
           echo "--"
