@@ -68,18 +68,3 @@ jobs:
           GOOS: linux
           SUBDIR: "bnr-utils/nz_s3Connector"
           EXECUTABLE_NAME: "nz_s3Connector"
-
-      - name: Create tarball and upload release
-        run: |
-          ls
-          pwd
-          cd bnr-utils
-          ls
-          pwd
-          cd ..
-          pwd
-          tar -czf bnr-utils/nz_s3connector.tgz -C bnr-utils/nz_s3Connector .
-          echo "tar file fail ho rahi"
-          gh release upload ${{ github.event.release.tag_name }} bnr-utils/nz_s3connector.tgz
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
