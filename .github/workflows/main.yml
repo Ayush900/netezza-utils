@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use myrepo to build s3 connector
+      - name: Use the repo ibm/go-release-executables@v1.0.0
         uses: Ayush900/go-release-executables@v1.0.0
       - name: Create tarball and upload release
         run: |
