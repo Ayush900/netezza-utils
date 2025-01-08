@@ -65,15 +65,6 @@ jobs:
       - name: Create tarball and upload release
         run: |
           tar -czf bnr-utils/nz_s3connector.tgz -C bnr-utils/nz_s3Connector .
-          echo "--"
-          ls
-          echo "--"
-          cd bnr-utils
-          echo "--"
-          ls
-          echo "--"
-          cd ..
-          pwd
           gh release upload ${{ github.event.release.tag_name }} bnr-utils/nz_s3connector.tgz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
