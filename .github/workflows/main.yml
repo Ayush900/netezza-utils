@@ -4,53 +4,55 @@ jobs:
   azure-connector:
     name: azure blob utility
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go_archs:
+          - "386"
+          - "amd64"
+        go_os:
+          - "linux"
+          - "windows"
+          - "darwin"
+        subdirs:
+          - "bnr-utils/nz_azConnector"
+        executable_names:
+          - "nz_azConnector"
     steps:
     - uses: actions/checkout@master
-    - name: linux i386
+    - name: Build Executable
       uses: Ayush900/go-release-executables@v1.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: "386"
-        GOOS: linux
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
-    - name: linux amd64
+        GOARCH: ${{ matrix.go_archs }}
+        GOOS: ${{ matrix.go_os }}
+        SUBDIR: ${{ matrix.subdirs }}
+        EXECUTABLE_NAME: ${{ matrix.executable_names }}
+
+  s3-connector:
+    name: S3 Blob Utility
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go_archs:
+          - "386"
+          - "amd64"
+        go_os:
+          - "linux"
+          - "windows"
+          - "darwin"
+        subdirs:
+          - "bnr-utils/nz_s3Connector"
+        executable_names:
+          - "nz_s3Connector"
+          - "awscli-bundle-1.16.144.zip"
+          - "Readme.txt"
+    steps:
+    - uses: actions/checkout@master
+    - name: Build Executable
       uses: Ayush900/go-release-executables@v1.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: amd64
-        GOOS: linux
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
-    - name: windows amd64
-      uses: Ayush900/go-release-executables@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: amd64
-        GOOS: windows
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
-    - name: windows 386
-      uses: Ayush900/go-release-executables@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: "386"
-        GOOS: windows
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
-    - name: darwin amd64
-      uses: Ayush900/go-release-executables@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: amd64
-        GOOS: darwin
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
-    - name: darwin 386
-      uses: Ayush900/go-release-executables@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: "386"
-        GOOS: darwin
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
+        GOARCH: ${{ matrix.go_archs }}
+        GOOS: ${{ matrix.go_os }}
+        SUBDIR: ${{ matrix.subdirs }}
+        EXECUTABLE_NAME: ${{ matrix.executable_names }}
