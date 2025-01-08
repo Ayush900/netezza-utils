@@ -77,7 +77,9 @@ jobs:
           ls
           pwd
           cd ..
+          pwd
           tar -czf bnr-utils/nz_s3connector.tgz -C bnr-utils/nz_s3connector .
+          echo "tar file fail ho rahi"
           gh release upload ${{ github.event.release.tag_name }} bnr-utils/nz_s3connector.tgz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
