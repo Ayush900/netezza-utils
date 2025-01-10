@@ -1,56 +1,73 @@
 on: release
 name: Build Release
 jobs:
-  azure-connector:
-    name: azure blob utility
+  # azure-connector:
+  #   name: azure blob utility
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: linux i386
+  #     uses: ibm/go-release-executables@v1.1.0
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       GOARCH: "386"
+  #       GOOS: linux
+  #       SUBDIR: "bnr-utils/nz_azConnector"
+  #       EXECUTABLE_NAME: "nz_azConnector"
+  #   - name: linux amd64
+  #     uses: ibm/go-release-executables@v1.1.0
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       GOARCH: amd64
+  #       GOOS: linux
+  #       SUBDIR: "bnr-utils/nz_azConnector"
+  #       EXECUTABLE_NAME: "nz_azConnector"
+  #   - name: windows amd64
+  #     uses: ibm/go-release-executables@v1.1.0
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       GOARCH: amd64
+  #       GOOS: windows
+  #       SUBDIR: "bnr-utils/nz_azConnector"
+  #       EXECUTABLE_NAME: "nz_azConnector"
+  #   - name: windows 386
+  #     uses: ibm/go-release-executables@v1.1.0
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       GOARCH: "386"
+  #       GOOS: windows
+  #       SUBDIR: "bnr-utils/nz_azConnector"
+  #       EXECUTABLE_NAME: "nz_azConnector"
+  #   - name: darwin amd64
+  #     uses: ibm/go-release-executables@v1.1.0
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       GOARCH: amd64
+  #       GOOS: darwin
+  #       SUBDIR: "bnr-utils/nz_azConnector"
+  #       EXECUTABLE_NAME: "nz_azConnector"
+  #   - name: darwin 386
+  #     uses: ibm/go-release-executables@v1.1.0
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       GOARCH: "386"
+  #       GOOS: darwin
+  #       SUBDIR: "bnr-utils/nz_azConnector"
+  #       EXECUTABLE_NAME: "nz_azConnector"
+
+  as3-connector:
+    name: S3 connector linux amd64
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - name: linux i386
-      uses: Ayush900/go-release-executables@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: "386"
-        GOOS: linux
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
-    - name: linux amd64
-      uses: Ayush900/go-release-executables@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: amd64
-        GOOS: linux
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
-    - name: windows amd64
-      uses: Ayush900/go-release-executables@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: amd64
-        GOOS: windows
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
-    - name: windows 386
-      uses: Ayush900/go-release-executables@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: "386"
-        GOOS: windows
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
-    - name: darwin amd64
-      uses: Ayush900/go-release-executables@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: amd64
-        GOOS: darwin
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
-    - name: darwin 386
-      uses: Ayush900/go-release-executables@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: "386"
-        GOOS: darwin
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
+      - uses: actions/checkout@v2
+      - name: Create tarball and upload release
+        run: |
+          cd go-release-executables
+          docker build . -f Dockerfile -t gh-upload-img
+          docker run  -e GITHUB_TOKEN="$GITHUB_TOKEN" -e SUBDIR=“bnr-utils/nz_azConnector" -e EXECUTABLE_NAME=“nz_azConnector" --name img1 gh-upload-img
+          docker stop img1
+          docker rm img1
+          tar -czf bnr-utils/nz_s3connector.tgz -C bnr-utils/nz_s3Connector .
+          gh release upload ${{ github.event.release.tag_name }} bnr-utils/nz_s3connector.tgz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
