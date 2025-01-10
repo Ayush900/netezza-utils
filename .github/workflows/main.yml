@@ -1,19 +1,19 @@
 on: release
 name: Build Release
 jobs:
-  # azure-connector:
-  #   name: azure blob utility
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: linux i386
-  #     uses: ibm/go-release-executables@v1.1.0
-  #     env:
-  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       GOARCH: "386"
-  #       GOOS: linux
-  #       SUBDIR: "bnr-utils/nz_azConnector"
-  #       EXECUTABLE_NAME: "nz_azConnector"
+  azure-connector:
+    name: azure blob utility
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: linux i386
+      uses: ibm/go-release-executables@v1.1.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GOARCH: "386"
+        GOOS: linux
+        SUBDIR: "bnr-utils/nz_azConnector"
+        EXECUTABLE_NAME: "nz_azConnector"
   #   - name: linux amd64
   #     uses: ibm/go-release-executables@v1.1.0
   #     env:
@@ -64,6 +64,8 @@ jobs:
         run: |
           cd go-release-executables
           docker build . -f Dockerfile -t gh-upload-img
+          echo "The Github Token is : $GITHUB_TOKEN"
+          docker images
           docker run  -e GITHUB_TOKEN="$GITHUB_TOKEN" -e SUBDIR=“bnr-utils/nz_azConnector" -e EXECUTABLE_NAME=“nz_azConnector" --name img1 gh-upload-img
           docker stop img1
           docker rm img1
