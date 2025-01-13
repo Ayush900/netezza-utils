@@ -9,8 +9,8 @@ export PATH=${GOPATH}/bin:${GO_HOME}/bin/:$PATH
 PROJECT_ROOT="/go/src/github.com/${GITHUB_REPOSITORY}"
 PROJECT_NAME=$(basename $GITHUB_REPOSITORY)
 
-mkdir -p $PROJECT_ROOT
-rmdir $PROJECT_ROOT
+sudo mkdir -p $PROJECT_ROOT
+sudo rmdir $PROJECT_ROOT
 # without above, following symlink creation fails (?)
 ln -s $GITHUB_WORKSPACE $PROJECT_ROOT
 cd $PROJECT_ROOT/${SUBDIR}
