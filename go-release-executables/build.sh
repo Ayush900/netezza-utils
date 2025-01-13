@@ -12,7 +12,7 @@ PROJECT_NAME=$(basename $GITHUB_REPOSITORY)
 sudo mkdir -p $PROJECT_ROOT
 sudo rmdir $PROJECT_ROOT
 # without above, following symlink creation fails (?)
-ln -s $GITHUB_WORKSPACE $PROJECT_ROOT
+sudo ln -s $GITHUB_WORKSPACE $PROJECT_ROOT
 cd $PROJECT_ROOT/${SUBDIR}
 go get -v ./...
 
