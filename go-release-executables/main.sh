@@ -26,6 +26,11 @@ EXECUTABLE_FILES=`echo "${EXECUTABLE_FILES}" | awk '{$1=$1};1'`
 PROJECT_ROOT="/go/src/github.com/${GITHUB_REPOSITORY}"
 TMP_ARCHIVE=tmp.tgz
 CKSUM_FILE=md5sum.txt
+echo "The value of PROJECT_ROOT : $PROJECT_ROOT"
+echo "The value of SUBDIR : $SUBDIR"
+echo "The value of EXECUTABLE_FILES : $EXECUTABLE_FILES"
+echo "The value of CKSUM_FILE : $CKSUM_FILE"
+
 md5sum ${PROJECT_ROOT}/${SUBDIR}/${EXECUTABLE_FILES} | cut -d ' ' -f 1 > ${CKSUM_FILE}
 tar cvfz ${TMP_ARCHIVE} ${CKSUM_FILE} --directory ${PROJECT_ROOT}/${SUBDIR} ${EXECUTABLE_FILES} 
 
