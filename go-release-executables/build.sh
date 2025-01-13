@@ -2,6 +2,11 @@
 
 set -x
 
+GITHUB_REPOSITORY=$1
+GITHUB_WORKSPACE=$2
+GOOS=$3
+EXECUTABLE_NAME=$4
+
 export GO_HOME=/usr/local/go
 export GOPATH=/go
 export PATH=${GOPATH}/bin:${GO_HOME}/bin/:$PATH
