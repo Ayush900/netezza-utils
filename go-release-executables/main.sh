@@ -20,7 +20,7 @@ RELEASE_UPLOAD_URL=${RELEASE_UPLOAD_URL/\{?name,label\}/}
 RELEASE_TAG_NAME=$(echo $THIS_GITHUB_EVENT | jq -r .release.tag_name)
 PROJECT_NAME=$(basename $GITHUB_REPOSITORY)
 
-EXECUTABLE_FILES=`./build.sh`
+EXECUTABLE_FILES=`sudo bash ./build.sh`
 EXECUTABLE_FILES=`echo "${EXECUTABLE_FILES}" | awk '{$1=$1};1'`
 
 PROJECT_ROOT="/go/src/github.com/${GITHUB_REPOSITORY}"
