@@ -65,8 +65,8 @@ jobs:
             echo "The value of RELEASE_UPLOAD_URL : $RELEASE_UPLOAD_URL"
             echo "The value of RELEASE_TAG_NAME : $RELEASE_TAG_NAME"
             echo "The value of PROJECT_NAME : $PROJECT_NAME"
-            
-            sudo bash go-release-executables/main.sh
+            cd go-release-executables           
+            sudo bash main.sh
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             GOARCH: "386"
