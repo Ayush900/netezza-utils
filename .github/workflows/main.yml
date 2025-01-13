@@ -54,29 +54,20 @@ jobs:
   #       GOOS: darwin
   #       SUBDIR: "bnr-utils/nz_azConnector"
   #       EXECUTABLE_NAME: "nz_azConnector"
-  test:
-    name: testrunbuild.sh
+  azure-connector:
+    name: azure blob utility
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v2
-        - name: Create tarball and upload release
+        - name: linux i386
           run: |
-            THIS_GITHUB_EVENT=$(cat $GITHUB_EVENT_PATH)
-            RELEASE_UPLOAD_URL=$(echo $THIS_GITHUB_EVENT | jq -r .release.upload_url)
-            RELEASE_UPLOAD_URL=${RELEASE_UPLOAD_URL/\{?name,label\}/}
-            RELEASE_TAG_NAME=$(echo $THIS_GITHUB_EVENT | jq -r .release.tag_name)
-            PROJECT_NAME=$(basename $GITHUB_REPOSITORY)
-            echo "The value of THIS_GITHUB_EVENT : $THIS_GITHUB_EVENT"
-            echo "The value of RELEASE_UPLOAD_URL : $RELEASE_UPLOAD_URL"
-            echo "The value of RELEASE_TAG_NAME : $RELEASE_TAG_NAME"
-            echo "The value of PROJECT_NAME : $PROJECT_NAME"
-            chmod 777 .
-            cd go-release-executables           
+            cd go-release-executables
+            chmod +x ./*
             bash main.sh
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             GOARCH: "386"
-            GOOS: darwin
+            GOOS: linux
             SUBDIR: "bnr-utils/nz_azConnector"
             EXECUTABLE_NAME: "nz_azConnector"
 
