@@ -1,35 +1,35 @@
 on: release
 name: Build Release
 jobs:
-  azure-connector:
-    name: azure blob utility
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: linux i386
-      uses: Ayush900/go-release-executables@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: "386"
-        GOOS: linux
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
-  #   - name: linux amd64
-  #     uses: ibm/go-release-executables@v1.1.0
+  # azure-connector:
+  #   name: azure blob utility
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: linux i386
+  #     uses: Ayush900/go-release-executables@v1.0.0
   #     env:
   #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       GOARCH: amd64
+  #       GOARCH: "386"
   #       GOOS: linux
   #       SUBDIR: "bnr-utils/nz_azConnector"
   #       EXECUTABLE_NAME: "nz_azConnector"
-    - name: windows amd64
-      uses: Ayush900/go-release-executables@v1.0.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GOARCH: amd64
-        GOOS: windows
-        SUBDIR: "bnr-utils/nz_azConnector"
-        EXECUTABLE_NAME: "nz_azConnector"
+  # #   - name: linux amd64
+  # #     uses: ibm/go-release-executables@v1.1.0
+  # #     env:
+  # #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # #       GOARCH: amd64
+  # #       GOOS: linux
+  # #       SUBDIR: "bnr-utils/nz_azConnector"
+  # #       EXECUTABLE_NAME: "nz_azConnector"
+  #   - name: windows amd64
+  #     uses: Ayush900/go-release-executables@v1.0.0
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       GOARCH: amd64
+  #       GOOS: windows
+  #       SUBDIR: "bnr-utils/nz_azConnector"
+  #       EXECUTABLE_NAME: "nz_azConnector"
   #   - name: windows 386
   #     uses: ibm/go-release-executables@v1.1.0
   #     env:
