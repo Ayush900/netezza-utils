@@ -14,14 +14,14 @@ jobs:
   #       GOOS: linux
   #       SUBDIR: "bnr-utils/nz_azConnector"
   #       EXECUTABLE_NAME: "nz_azConnector"
-  # #   - name: linux amd64
-  # #     uses: ibm/go-release-executables@v1.1.0
-  # #     env:
-  # #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  # #       GOARCH: amd64
-  # #       GOOS: linux
-  # #       SUBDIR: "bnr-utils/nz_azConnector"
-  # #       EXECUTABLE_NAME: "nz_azConnector"
+  #   - name: linux amd64
+  #     uses: ibm/go-release-executables@v1.1.0
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       GOARCH: amd64
+  #       GOOS: linux
+  #       SUBDIR: "bnr-utils/nz_azConnector"
+  #       EXECUTABLE_NAME: "nz_azConnector"
   #   - name: windows amd64
   #     uses: Ayush900/go-release-executables@v1.0.0
   #     env:
@@ -68,6 +68,61 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             GOARCH: "386"
             GOOS: linux
+            SUBDIR: "bnr-utils/nz_azConnector"
+            EXECUTABLE_NAME: "nz_azConnector"
+        - name: linux amd64
+          run: |
+            cd go-release-executables
+            chmod +x ./*
+            bash main.sh
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GOARCH: amd64
+            GOOS: linux
+            SUBDIR: "bnr-utils/nz_azConnector"
+            EXECUTABLE_NAME: "nz_azConnector"
+        - name: windows amd64
+          run: |
+            cd go-release-executables
+            chmod +x ./*
+            bash main.sh
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GOARCH: amd64
+            GOOS: windows
+            SUBDIR: "bnr-utils/nz_azConnector"
+            EXECUTABLE_NAME: "nz_azConnector"
+        - name: windows 386
+          run: |
+            cd go-release-executables
+            chmod +x ./*
+            bash main.sh
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GOARCH: "386"
+            GOOS: windows
+            SUBDIR: "bnr-utils/nz_azConnector"
+            EXECUTABLE_NAME: "nz_azConnector"
+        - name: darwin amd64
+          run: |
+            cd go-release-executables
+            chmod +x ./*
+            bash main.sh
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GOARCH: amd64
+            GOOS: darwin
+            SUBDIR: "bnr-utils/nz_azConnector"
+            EXECUTABLE_NAME: "nz_azConnector"
+        - name: darwin 386
+          run: |
+            cd go-release-executables
+            chmod +x ./*
+            bash main.sh
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GOARCH: "386"
+            GOOS: darwin
             SUBDIR: "bnr-utils/nz_azConnector"
             EXECUTABLE_NAME: "nz_azConnector"
 
