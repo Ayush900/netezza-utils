@@ -67,6 +67,11 @@ jobs:
           RELEASE_UPLOAD_URL=${RELEASE_UPLOAD_URL/\{?name,label\}/}
           RELEASE_TAG_NAME=$(echo $THIS_GITHUB_EVENT | jq -r .release.tag_name)
           PROJECT_NAME=$(basename $GITHUB_REPOSITORY)
+          echo "The value of THIS_GITHUB_EVENT : $THIS_GITHUB_EVENT"
+          echo "The value of RELEASE_UPLOAD_URL : $RELEASE_UPLOAD_URL"
+          echo "The value of RELEASE_TAG_NAME : $RELEASE_TAG_NAME"
+          echo "The value of PROJECT_NAME : $PROJECT_NAME"
+          
           tar -czf bnr-utils/nz_s3connector.tgz -C bnr-utils/nz_s3Connector .
           gh release upload ${{ github.event.release.tag_name }} bnr-utils/nz_s3connector.tgz
         env:
