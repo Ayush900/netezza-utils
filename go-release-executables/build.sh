@@ -20,7 +20,6 @@ sudo rmdir $PROJECT_ROOT
 # without above, following symlink creation fails (?)
 sudo ln -s $GITHUB_WORKSPACE $PROJECT_ROOT
 cd $PROJECT_ROOT/${SUBDIR}
-pwd
 go get -v ./...
 
 EXT=''
