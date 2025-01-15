@@ -7,6 +7,7 @@ GITHUB_WORKSPACE=$2
 GOOS=$3
 EXECUTABLE_NAME=$4
 SUBDIR=$5
+GOARCH=$6
 
 export GO_HOME=/usr/local/go
 export GOPATH=/go
@@ -30,14 +31,14 @@ fi
 
 if [ -z "${EXECUTABLE_NAME}" ]; then
   OUTFILE=${PROJECT_NAME}${EXT}
-else 
+else
   OUTFILE=${EXECUTABLE_NAME}${EXT}
 fi
 
 if [ -x "./build.sh" ]; then
   COMPILED_FILES=`./build.sh "${OUTFILE}" "${BUILD_OPTS}"`
 else
-  go build -o ${OUTFILE} "${BUILD_OPTS}"
+  GOOS=$GOOS GOARCH=$GOARCH go build -o ${OUTFILE} "${BUILD_OPTS}"
   COMPILED_FILES="${OUTFILE}"
 fi
 
