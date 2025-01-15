@@ -21,6 +21,7 @@ sudo rmdir $PROJECT_ROOT
 # without above, following symlink creation fails (?)
 sudo ln -s $GITHUB_WORKSPACE $PROJECT_ROOT
 cd $PROJECT_ROOT/${SUBDIR}
+go get -v golang.org/x/net/http/httpproxy
 go get -v ./...
 
 EXT=''
