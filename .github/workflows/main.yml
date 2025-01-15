@@ -10,13 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v2
-        - name: Install Go dependencies
-          run: |
-            go get golang.org/x/net/http/httpproxy
-            go get golang.org/x/sys/windows
-            go get golang.org/x/sys/windows/registry
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         - name: linux i386
           run: |
             cd go-release-executables
@@ -37,50 +30,6 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             GOARCH: amd64
             GOOS: linux
-            SUBDIR: "bnr-utils/nz_azConnector"
-            EXECUTABLE_NAME: "nz_azConnector"
-        - name: windows amd64
-          run: |
-            cd go-release-executables
-            chmod +x ./*
-            bash main.sh
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GOARCH: amd64
-            GOOS: windows
-            SUBDIR: "bnr-utils/nz_azConnector"
-            EXECUTABLE_NAME: "nz_azConnector"
-        - name: windows 386
-          run: |
-            cd go-release-executables
-            chmod +x ./*
-            bash main.sh
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GOARCH: "386"
-            GOOS: windows
-            SUBDIR: "bnr-utils/nz_azConnector"
-            EXECUTABLE_NAME: "nz_azConnector"
-        - name: darwin amd64
-          run: |
-            cd go-release-executables
-            chmod +x ./*
-            bash main.sh
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GOARCH: amd64
-            GOOS: darwin
-            SUBDIR: "bnr-utils/nz_azConnector"
-            EXECUTABLE_NAME: "nz_azConnector"
-        - name: darwin 386
-          run: |
-            cd go-release-executables
-            chmod +x ./*
-            bash main.sh
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GOARCH: "386"
-            GOOS: darwin
             SUBDIR: "bnr-utils/nz_azConnector"
             EXECUTABLE_NAME: "nz_azConnector"
 
